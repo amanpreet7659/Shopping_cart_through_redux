@@ -1,23 +1,23 @@
 import logo from './logo.svg';
-import './App.css';
+import './assets/css/App.css';
+import Hedder from './Component/Hedder';
+import { Front_window } from './Component/Front_window';
+import Product_Window from './Component/Product_Window';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CartItems from './Component/CartItems';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Hedder/> */}
+      <BrowserRouter>
+        {/* <Front_window /> */}
+        <Switch>
+          <Route path="/" exact component={Front_window}></Route>
+          <Route path="/CartItems" exact component={CartItems}></Route>
+          <Route path="/Product_Window" exact component={Product_Window}></Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
