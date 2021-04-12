@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeCartData } from '../Action/ProductFetchAction'
+import { checkoutData, removeCartData } from '../Action/ProductFetchAction'
 import Hedder from './Hedder'
 
 const CartItems = () => {
-    const data = useSelector(state => state.API.cartData);
-    const remdata=useSelector(state=>state.API.updateData)
+    const cartdata = useSelector(state => state.API.cartData);
+    const [data, setdata] = useState(cartdata)
+    // const remdata = useSelector(state => state.API.updateData)
     const [id, setId] = useState();
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const [incre, setincre] = useState(data)
 
-    console.log("cartdata ", data, id);
+    console.log("cartdata ", cartdata);
 
-    const handleRemove=(id)=>{
-        dispatch(removeCartData(id))
+    const handleRemove = (id) => {
+        // dispatch(removeCartData(id))
+        setdata(cartdata.splice(id, 1));
     }
-    useEffect(()=>{
-        dispatch(removeCartData(id))
-    },[data])
+    const handleCheckout = (id) => {
+        dispatch(checkoutData(id))
+        // alert(cartdata[id].data.data.price)
+        // window.confirm(cartdata[id].data.data.price)
+        if (window.confirm("Are You Sure to buy Prodict " + cartdata[id].data.data.title + " Price is : " + cartdata[id].data.data.price)) {
+            alert("Order Placed")
+            setdata(cartdata.splice(id, 1))
+        }
+    }
 
     return (<div>
         <Hedder />
@@ -37,10 +45,11 @@ const CartItems = () => {
                         <lable>{i.data.data.title}</lable>
                         <br></br>
                         <input className="cartNumber" min="1" type="number" onChange={(e) => {
-                            incre[j].quantity=e.target.value
-                            setId([j].quantity=e.target.value)
-                        }} placeholder={i.quantity} value={incre[j].quantity} />
-                        <button onClick={()=>{handleRemove(j)}}>Remove</button>
+                            incre[j].quantity = e.target.value
+                            setId([j].quantity = e.target.value)
+                        }} placeholder={i.quantity} value={i.quantity} />
+                        <button onClick={() => { handleRemove(j) }}>Remove</button>
+                        <button onClick={() => { handleCheckout(j) }}>Checkout</button>
                     </div>
                 </div>)
             })

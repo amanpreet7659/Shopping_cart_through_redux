@@ -42,19 +42,19 @@ body {
 }
 
 .Hedding {
-  background           : rgb(80, 122, 248);
-  border               : 2px rgb(80, 122, 248) solid;
-  height               : auto;
-  color                : white;
-  display              : flex;
-  grid-template-columns: auto auto auto auto auto;
-  grid-column-gap      : 70px;
-  padding              : 0px 10px;
+  background              : rgb(80, 122, 248);
+  border                  : 2px rgb(80, 122, 248) solid;
+  height                  : auto;
+  color                   : white;
+  display                 : flex;
+  grid-template-columns   : auto auto auto auto auto;
+  grid-column-gap         : 70px;
+  padding                 : 0px 10px;
   /* position             : fixed; */
 }
 
 .logo {
-  width  : 10%;
+  width  : 14%;
   padding: 0px 5pc;
 }
 
@@ -98,6 +98,7 @@ body {
   border-radius: 10px;
   margin-bottom: 0;
 }
+
 /* margin-top: 200px; */
 
 .cartBtn:hover {
@@ -105,15 +106,74 @@ body {
   color     : black;
 }
 
-.sliderdiv
-{
+.sliderdiv {
   margin-bottom: 50px;
 }
-.Cart{
-  color: #fff;
+
+.Cart {
+  color          : #fff;
   text-decoration: none;
 }
-.cartNumber
-{
+
+.cartNumber {
   width: 30px;
+}
+
+.login_div {
+  display              : flex;
+  grid-template-columns: auto auto;
+  width                : 50%;
+  /* margin            : auto; */
+  padding              : 50px 0px
+}
+
+.loginInput {
+  margin-bottom: 20px;
+  margin-top   : 20px;
+  border       : none;
+  border-bottom: 2px black solid;
+  border-radius: 10px;
+  padding      : 0px 10px;
+  font-size    : 18px;
+  height       : auto;
+}
+
+.headerdiv {
+  display              : flex;
+  grid-template-columns: auto auto;
+}
+
+.topButtons {
+  height    : 40px;
+  width     : 100%;
+  border    : none;
+  background: #a9dccc;
+  text-align: center;
+  font-size : 27px;
+}
+
+.form_div {
+  margin: auto;
+  width : 50%;
+}
+
+.Loginbutton {
+  width        : 20%;
+  font-size    : 20px;
+  background   : #73bf73;
+  border-radius: 20px;
+  border       : none;
+}
+
+.Alert {
+  width     : 50%;
+  margin    : auto;
+  background: none !important;
+}
+.logout
+{
+  background: none;
+  border: none;
+  margin: auto;
+  color: white;
 }

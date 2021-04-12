@@ -8,7 +8,6 @@ export const Front_window = () => {
         <div>
             {/* <Slider_Window />    */}
             <Product_Window />
-
         </div>
     )
 }
