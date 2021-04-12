@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ADD_TO_CART, CHECK_OUT, GET_PRODUCT, LOGIN_USER, REGISTER_DATA, REMOVE_TO_CART } from "../Store/Events"
+import { ADD_TO_CART, BUY_NOW, CHECK_OUT, GET_PRODUCT, LOGIN_USER, REGISTER_DATA, REMOVE_TO_CART } from "../Store/Events"
 
 export const getProducts = () => dispatch => {
     axios.get('https://fakestoreapi.com/products')
@@ -40,7 +40,7 @@ export const removeCartData = (id) => dispatch => {
 export const checkoutData = (id) => dispatch => {
     console.log("checkout id ", id);
     dispatch({
-        type: CHECK_OUT,
+        type: BUY_NOW,
         payload: id
     })
 }
@@ -57,7 +57,14 @@ export const login_user = (data) => dispatch => {
     else {
         dispatch({
             type: LOGIN_USER,
-            payload: data
+            payload: {data:data,token:true}
         })
     }
+}
+
+export const checkOut=()=>dispatch=>{
+    dispatch({
+        type:CHECK_OUT,
+        payload:true
+    })
 }

@@ -6,9 +6,13 @@ import LoginPage from './LoginPage';
 const Product_Window = () => {
     const dispatch = useDispatch();
     const API_DATA = useSelector(state => state.API.API_Data.data)
+    const API_DATA2 = useSelector(state => state.API.API_Data)
+
     const [getData, setGetData] = useState([]);
     const login = useSelector(state => state.API.login);
     const [cartData, setcartData] = useState(0);
+    const c=useSelector(state=>state.API.cartData)
+    console.log(c.length);
     const [qty, setqty] = useState(1);
     useEffect(() => {
         dispatch(getProducts());
@@ -31,15 +35,21 @@ const Product_Window = () => {
     // console.log('getData', getData)
 
     const searchfunction = (e) => {
-        // let search = getData.filter((i) => { return (i.title.includes(e.target.value)) })
-
-        // let search = getData.map((i)=>{
-        //     return (i.filter((i)=>{return(i.data.cetagory.includes(e.target.value))}))
-        // })
-
-        // console.log("Search ", search);
-        // setGetData(search)
-        // console.log(getData);
+        let search = getData.filter((i)=>{return(i.data.title.includes(e.target.value))})
+        if(e.target.value==="")
+        {
+            let a = API_DATA.map((o) => {
+                return {
+                    quantity: 1,
+                    data: o
+                }
+            })
+            setGetData(a)
+        }
+        else
+        {
+            setGetData(search)
+        }
     }
 
     const handleQty = (e) => {
@@ -48,7 +58,7 @@ const Product_Window = () => {
     return (
         <div className="real" >
             {!login && <LoginPage />}
-            {login && <><Hedder searchfunction={searchfunction} />
+            {login && <><Hedder cart={c.length} searchfunction={searchfunction} />
                 {/* <h1>Product Window</h1> */}
                 <div className="display">
                     {getData.map((i, j) => {
@@ -64,7 +74,7 @@ const Product_Window = () => {
                                 <lable>qty  </lable><input min="1" onChange={handleQty} className="cartNumber" placeholder={i.quantity} type="number" />
                                 <button className="cartBtn" onClick={() => {
                                     setcartData(cartData + 1)
-                                    dispatch(addToCart(i, qty))
+                                    dispatch(addToCart(i,qty))
                                 }}> Add to Cart</button>
                             </div>
                         </div>)

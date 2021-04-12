@@ -1,15 +1,15 @@
 // import React from 'react'
 import { Alert, AlertTitle } from '@material-ui/lab'
-import { ADD_TO_CART, CHECK_OUT, GET_PRODUCT, LOGIN_USER, REGISTER_DATA, REMOVE_TO_CART } from '../Store/Events'
+import { ADD_TO_CART, BUY_NOW, CHECK_OUT, GET_PRODUCT, LOGIN_USER, LOGOUT, REGISTER_DATA, REMOVE_TO_CART } from '../Store/Events'
 
 const initialstate = {
     API_Data: "",
     cartData: [],
     updateData: [],
     login: false,
-    alert:"",
-    login_user:"",
-    buyData:""
+    alert: "",
+    login_user: "",
+    buyData: ""
 }
 const Funtions = (state = initialstate, action) => {
     switch (action.type) {
@@ -39,14 +39,14 @@ const Funtions = (state = initialstate, action) => {
                     cartData: removedata
                 })
             }
-        case CHECK_OUT:
+        case BUY_NOW:
             {
                 let data = state.cartData;
                 console.log("dataaaaaa ", data[action.payload]);
 
                 return ({
                     ...state,
-                    buyData:data[action.payload]
+                    buyData: data[action.payload]
                 })
             }
         case REGISTER_DATA: {
@@ -66,21 +66,30 @@ const Funtions = (state = initialstate, action) => {
         }
         case LOGIN_USER:
             {
-                let data = action.payload
+                let data = action.payload.data
                 let local = JSON.parse(localStorage.getItem("Register_Data"))
                 {
                     local && local.map((i) => {
-                        if (i.UName === data.UName && i.Pass === data.Pass) {
-                            console.log("Exist");
+                        if (i.UName === data.UName && i.Pass === data.Pass && action.payload.token===true) {
+                            // console.log("Exist");
                             state.login = true
-                            state.login_user=i
+                            state.login_user = i
                         }
                         else {
-                            state.alert=true
+                            state.alert = true
                         }
                     })
                 }
             }
+        case CHECK_OUT:
+            {
+
+                return({...state,cartData:[]})
+            }
+        case LOGOUT:
+            let sss=state.payload
+            console.log(sss);
+            // return({})
         default:
             {
                 return state

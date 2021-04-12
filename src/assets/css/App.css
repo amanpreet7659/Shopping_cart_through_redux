@@ -97,6 +97,8 @@ body {
   color        : #fff;
   border-radius: 10px;
   margin-bottom: 0;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* margin-top: 200px; */
@@ -163,6 +165,7 @@ body {
   background   : #73bf73;
   border-radius: 20px;
   border       : none;
+  margin-top: 20px;
 }
 
 .Alert {
@@ -176,4 +179,44 @@ body {
   border: none;
   margin: auto;
   color: white;
+  cursor: pointer;
+
 }
+.logout:hover
+{
+  background: #53da14;
+  border-radius: 10px;
+  
+}
+.remove
+{
+  padding: 0px 0px;
+  width: 30%;
+  font-size: 17px;
+  background: #da3214;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+}
+.Buynow
+{
+  padding: 0px 0px;
+  width: 30%;
+  font-size: 17px;
+  background: #53da14;
+  border-radius: 20px;
+  border: none;
+}
+
+.checkout{
+  background: #61e061;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: auto;
+  float: right;
+}
+

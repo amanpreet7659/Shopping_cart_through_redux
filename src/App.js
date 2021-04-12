@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './assets/css/App.css';
-import Hedder from './Component/Hedder';
 import { Front_window } from './Component/Front_window';
 import Product_Window from './Component/Product_Window';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
