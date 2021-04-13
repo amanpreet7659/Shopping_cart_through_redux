@@ -29,7 +29,7 @@ const CartItems = () => {
         if (token) {
             if (window.confirm("Are You Sure to buy Prodict " + cartdata[id].data.data.title + " Price is : " + cartdata[id].data.data.price + "Quantity is : " + cartdata[id].quantity)) {
                 alert("Order Placed")
-                if (local.length >= 0) {
+                if (local) {
                     local.push(cartdata[id]);
                     localStorage.setItem('placedorders', JSON.stringify(local))
                 }
@@ -60,7 +60,7 @@ const CartItems = () => {
             if (token) {
                 if (window.confirm("Are You Sure to Buy all products price is : " + sum)) {
                     alert("Order placed successfully")
-                    if (local.length >= 0) {
+                    if (local) {
                         local.push(cartdata);
                         localStorage.setItem('All', JSON.stringify(local))
                     }

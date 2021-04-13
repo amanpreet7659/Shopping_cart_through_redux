@@ -28,9 +28,6 @@ const LoginPage = () => {
     const handleInput = (e) => {
         e.target.name === "UName" ? register.UName = e.target.value : e.target.name === "pass" ? register.Pass = e.target.value : register.conPass = e.target.value
         console.log(register);
-        // if (register.Pass != e.target.value) {
-        //     seterr(pre => !pre)
-        // }
     }
     const registerUser = () => {
         // setshow(pre => !pre)
