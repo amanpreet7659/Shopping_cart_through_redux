@@ -97,8 +97,8 @@ body {
   color        : #fff;
   border-radius: 10px;
   margin-bottom: 0;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left  : 10px;
+  margin-right : 10px;
 }
 
 /* margin-top: 200px; */
@@ -116,6 +116,16 @@ body {
   color          : #fff;
   text-decoration: none;
 }
+
+/* .Cart:hover {
+  background: rgb(121, 238, 121);
+  color: black;
+  /* border-radius: 6px;
+  padding: 0px 7px; */
+/* } */
+/* .sup:hover{
+  color: black;
+} */
 
 .cartNumber {
   width: 30px;
@@ -165,7 +175,7 @@ body {
   background   : #73bf73;
   border-radius: 20px;
   border       : none;
-  margin-top: 20px;
+  margin-top   : 20px;
 }
 
 .Alert {
@@ -173,50 +183,63 @@ body {
   margin    : auto;
   background: none !important;
 }
-.logout
-{
+
+.logout {
   background: none;
-  border: none;
-  margin: auto;
-  color: white;
-  cursor: pointer;
+  border    : none;
+  margin    : auto;
+  color     : white;
+  cursor    : pointer;
 
 }
-.logout:hover
-{
-  background: #53da14;
+
+.logout:hover {
+  background   : #53da14;
   border-radius: 10px;
-  
-}
-.remove
-{
-  padding: 0px 0px;
-  width: 30%;
-  font-size: 17px;
-  background: #da3214;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 20px;
-  border: none;
-}
-.Buynow
-{
-  padding: 0px 0px;
-  width: 30%;
-  font-size: 17px;
-  background: #53da14;
-  border-radius: 20px;
-  border: none;
+
 }
 
-.checkout{
-  background: #61e061;
-  border: none;
+.remove {
+  padding      : 0px 0px;
+  width        : 30%;
+  font-size    : 17px;
+  background   : #da3214;
+  margin-left  : 20px;
+  margin-right : 20px;
+  border-radius: 20px;
+  border       : none;
+}
+
+.Buynow {
+  padding      : 0px 0px;
+  width        : 30%;
+  font-size    : 17px;
+  background   : #53da14;
+  border-radius: 20px;
+  border       : none;
+}
+
+.checkout {
+  background   : #61e061;
+  border       : none;
   border-radius: 10px;
-  height: 50px;
-  font-size: 20px;
-  font-weight: bold;
-  margin: auto;
-  float: right;
+  height       : 50px;
+  font-size    : 20px;
+  font-weight  : bold;
+  margin       : auto;
+  float        : right;
 }
 
+.login {
+  background: none;
+  border    : none;
+  color     : white;
+  font-size : 16px;
+}
+
+.More {
+  background: none;
+  border    : none;
+  font-size : 16px;
+  color     : #fff;
+}

@@ -6,13 +6,15 @@ import LoginPage from './LoginPage';
 const Product_Window = () => {
     const dispatch = useDispatch();
     const API_DATA = useSelector(state => state.API.API_Data.data)
-    const API_DATA2 = useSelector(state => state.API.API_Data)
+
+    const token = JSON.parse(localStorage.getItem("Token"))
 
     const [getData, setGetData] = useState([]);
-    const login = useSelector(state => state.API.login);
+    const login = JSON.parse(localStorage.getItem("Token"))
+    // const [login, setlogin] = useState(true)
     const [cartData, setcartData] = useState(0);
-    const c=useSelector(state=>state.API.cartData)
-    console.log(c.length);
+    const c = JSON.parse(localStorage.getItem('cart'))
+    // console.log(c.length);
     const [qty, setqty] = useState(1);
     useEffect(() => {
         dispatch(getProducts());
@@ -35,9 +37,8 @@ const Product_Window = () => {
     // console.log('getData', getData)
 
     const searchfunction = (e) => {
-        let search = getData.filter((i)=>{return(i.data.title.includes(e.target.value))})
-        if(e.target.value==="")
-        {
+        let search = getData.filter((i) => { return (i.data.title.toLowerCase().includes(e.target.value)) })
+        if (e.target.value === "") {
             let a = API_DATA.map((o) => {
                 return {
                     quantity: 1,
@@ -46,8 +47,7 @@ const Product_Window = () => {
             })
             setGetData(a)
         }
-        else
-        {
+        else {
             setGetData(search)
         }
     }
@@ -55,10 +55,12 @@ const Product_Window = () => {
     const handleQty = (e) => {
         setqty(e.target.value);
     }
+
+    console.log(login);
     return (
         <div className="real" >
-            {!login && <LoginPage />}
-            {login && <><Hedder cart={c.length} searchfunction={searchfunction} />
+            {/* {!login && <LoginPage />} */}
+            {<><Hedder cart={c?c.length:null} searchfunction={searchfunction} />
                 {/* <h1>Product Window</h1> */}
                 <div className="display">
                     {getData.map((i, j) => {
@@ -74,7 +76,8 @@ const Product_Window = () => {
                                 <lable>qty  </lable><input min="1" onChange={handleQty} className="cartNumber" placeholder={i.quantity} type="number" />
                                 <button className="cartBtn" onClick={() => {
                                     setcartData(cartData + 1)
-                                    dispatch(addToCart(i,qty))
+                                    dispatch(addToCart(i, qty))
+
                                 }}> Add to Cart</button>
                             </div>
                         </div>)

@@ -21,8 +21,21 @@ const Funtions = (state = initialstate, action) => {
         }
 
         case ADD_TO_CART: {
-            let arr = state.cartData
-            arr.push(action.payload)
+            // debugger
+            let local = JSON.parse(localStorage.getItem('cart'))
+            let arr = []
+            if(local)
+            {
+                local.push(action.payload)
+                console.log(local);
+                localStorage.setItem("cart", JSON.stringify(local))
+            }
+            else
+            {
+                arr.push(action.payload)
+                localStorage.setItem("cart", JSON.stringify(arr))                
+            }
+            // debugger
             return ({
                 ...state,
                 cartData: arr
@@ -50,46 +63,72 @@ const Funtions = (state = initialstate, action) => {
                 })
             }
         case REGISTER_DATA: {
+            // debugger
             let data = action.payload;
             let arr1 = []
             let arr = JSON.parse(localStorage.getItem("Register_Data"));
             if (arr) {
+                // debugger
                 arr.push(data)
                 localStorage.setItem("Register_Data", JSON.stringify(arr))
-                state.login = false
+                // state.login = false
             }
             else {
+                // debugger
                 arr1.push(data)
                 localStorage.setItem("Register_Data", JSON.stringify(arr1))
-                state.login = false
+                // state.login = false
             }
         }
         case LOGIN_USER:
             {
                 let data = action.payload.data
+                // debugger
+                console.log("data ", data);
+                localStorage.setItem("user", JSON.stringify(data))
                 let local = JSON.parse(localStorage.getItem("Register_Data"))
-                {
-                    local && local.map((i) => {
-                        if (i.UName === data.UName && i.Pass === data.Pass && action.payload.token===true) {
-                            // console.log("Exist");
-                            state.login = true
-                            state.login_user = i
-                        }
-                        else {
-                            state.alert = true
-                        }
-                    })
-                }
+                let token = JSON.parse(localStorage.getItem("Token"))
+                // {
+                //     local && local.map((i) => {
+                //         if (i.UName === data.UName && i.Pass === data.Pass) {
+                //             debugger
+                //             localStorage.setItem("Token", JSON.stringify(true));
+                //             // if (token === true) {
+                //                 state.login = true
+                //                 state.login_user = i
+                //             // }
+                //         }
+                //         else {
+                //             state.alert = true
+                //         }
+                //     })
+                // }
+                console.log((local));
+                local.map((i) => {
+                    if (i.UName === data.UName && i.Pass === data.Pass) {
+                        debugger
+                        localStorage.setItem("Token", JSON.stringify(true));
+                        state.login = true
+                        state.login_user = i
+                        window.location.href = "/"
+                        // window.open('/ProductPage')
+                        debugger
+                    }
+                })
             }
         case CHECK_OUT:
             {
 
-                return({...state,cartData:[]})
+                return ({ ...state, cartData: [] })
             }
         case LOGOUT:
-            let sss=state.payload
-            console.log(sss);
-            // return({})
+            {
+                localStorage.setItem("Token", false)
+                return ({
+                    type: LOGOUT,
+                    ...state,
+                })
+            }
         default:
             {
                 return state

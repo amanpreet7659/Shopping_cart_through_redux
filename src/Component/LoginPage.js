@@ -8,10 +8,13 @@ import ButtonHeader from './ButtonHeader'
 const LoginPage = () => {
     const [show, setshow] = useState(false)
     const [err, seterr] = useState(false);
+    const local=JSON.parse(localStorage.getItem("Token"))
     const [register, setregister] = useState({
-        UName: "", Pass: "", conPass: ""
+        UName: "", 
+        Pass: "", 
+        conPass: ""
     })
-    const login = useSelector(state => state.API.alert)
+    const errshow = useSelector(state => state.API.alert)
     const dispatch = useDispatch();
 
     const handleRegister = () => {
@@ -37,6 +40,7 @@ const LoginPage = () => {
         }
         else {
             if (register.Pass === register.conPass) {
+                debugger
                 dispatch(RegisterUser(register))
             }
             else {
@@ -52,7 +56,7 @@ const LoginPage = () => {
 
     return (
         <div className="form_div">
-            {login && <Alert className="Alert" severity="error">
+            {errshow && <Alert className="Alert" severity="error">
                 <strong>User Not Exist</strong>
             </Alert>}
             <div className="login_div">
@@ -63,28 +67,19 @@ const LoginPage = () => {
                     <input className="topButtons" onClick={handleRegister} type="button" value="Register User" />
                 </div>
             </div>
-            {/* <label className="lable1">Enter UserName </label> */}
             <br></br>
             <TextField id="standard-basic" name="UName" className="loginInput" label="Enter UserName" onChange={handleInput}></TextField>
-
-            {/* <input onChange={handleInput} name="UName" className="loginInput" type="text" placeholder="" /> */}
             <br></br>
-            {/* <label className="lable1">Enter Password</label> */}
             <br></br>
             <TextField id="password" type="password" name="pass" className="loginInput" label="Enter Password" onChange={handleInput}></TextField>
-
-            {/* <input onChange={handleInput} name="pass" className="loginInput" type="password" placeholder="Enter Password" /> */}
             <br></br>
             {show && <>
-                {/* <label className="lable1">Re-Enter Password</label> */}
                 <br></br>
                 <TextField id="password" type="password" name="conPass" className="loginInput" label="Re-Enter Password" onChange={handleInput}></TextField>
-                {/* <input className="loginInput" name="conPass" onChange={handleInput} type="password" placeholder="Re-Enter Password" /><br></br> */}
-                {/* {err && <label style={{ color: "red" }}>password not matched</label>} */}
             </>
             }
             <br></br>
-            {!show && <><button className="Loginbutton" onClick={handleLogin}>Login</button></>}
+            {!show && <><button className="Loginbutton" onClick={handleLogin}>Login</button></>}<br></br>
             {show && <> <button className="Loginbutton" onClick={registerUser}>Register</button></>}
         </div>
     )

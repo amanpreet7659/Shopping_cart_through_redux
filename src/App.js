@@ -4,6 +4,7 @@ import Product_Window from './Component/Product_Window';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CartItems from './Component/CartItems';
 import LoginPage from './Component/LoginPage';
+import Placed from './Component/Placed';
 
 function App() {
   return (
@@ -12,10 +13,11 @@ function App() {
       <BrowserRouter>
         {/* <Front_window /> */}
         <Switch>
-          <Route path="/" exact component={Front_window}></Route>
+          <Route path="/" exact component={Product_Window}></Route>
+          <Route path="/Front_window" exact component={Front_window}></Route>
           <Route path="/CartItems" exact component={CartItems}></Route>
-          <Route path="/Product_Window" exact component={Product_Window}></Route>
-          {/* <Route path="/LoginPage" exact component={LoginPage}></Route> */}
+          <Route path="/LoginPage" exact component={LoginPage}></Route>
+          <Route path="/Placed" exact component={Placed}></Route>
         </Switch>
       </BrowserRouter>
     </div>

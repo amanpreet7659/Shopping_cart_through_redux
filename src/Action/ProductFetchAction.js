@@ -21,12 +21,14 @@ export const getProducts = () => dispatch => {
 }
 export const addToCart = (data, qty) => dispatch => {
     console.log("ADD TO CART FUNCTION ", data);
+    // debugger
     dispatch({
         type: ADD_TO_CART,
         payload: {
             data: data, quantity: qty
         }
     })
+    // debugger
 }
 
 export const removeCartData = (id) => dispatch => {
@@ -51,20 +53,27 @@ export const RegisterUser = (data) => dispatch => {
 
 export const login_user = (data) => dispatch => {
     // console.log("login data ",data);
-    if (data===false) {
-        dispatch({ type:LOGIN_USER, payload: false })
+    if (data === false) {
+        dispatch({ type: LOGIN_USER, payload: false })
     }
     else {
         dispatch({
             type: LOGIN_USER,
-            payload: {data:data,token:true}
+            payload: { data: data, token: true }
         })
     }
 }
 
-export const checkOut=()=>dispatch=>{
+export const checkOut = () => dispatch => {
     dispatch({
-        type:CHECK_OUT,
-        payload:true
+        type: CHECK_OUT,
+        payload: true
     })
+}
+
+export const logoutSes = () => dispatch => { 
+    // localStorage.setItem("Token",fal se)
+    localStorage.removeItem("Token")
+    window.location.href="/"
+    dispatch("")
 }

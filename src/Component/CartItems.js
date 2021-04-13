@@ -6,7 +6,9 @@ import Hedder from './Hedder'
 import Placed from './Placed'
 
 const CartItems = () => {
-    const cartdata = useSelector(state => state.API.cartData);
+    const cartdata = JSON.parse(localStorage.getItem('cart'))
+    let arr = [];
+    let local = JSON.parse(localStorage.getItem('placedorders'))
     const [data, setdata] = useState(cartdata)
     // const remdata = useSelector(state => state.API.updateData)
     const [id, setId] = useState();
@@ -17,32 +19,74 @@ const CartItems = () => {
 
     const handleRemove = (id) => {
         // dispatch(removeCartData(id))
-        setdata(data.splice(id, 1));
+        cartdata.splice(id, 1)
+        localStorage.setItem('cart', JSON.stringify(cartdata))
+        setdata(JSON.parse(localStorage.getItem('cart')))
     }
     const handleBuyNow = (id) => {
         dispatch(checkoutData(id))
-        // alert(cartdata[id].data.data.price)
-        // window.confirm(cartdata[id].data.data.price)
-        if (window.confirm("Are You Sure to buy Prodict " + cartdata[id].data.data.title + " Price is : " + cartdata[id].data.data.price + "Quantity is : " + cartdata[id].quantity)) {
-            alert("Order Placed")
-            setdata(data.splice(id, 1))
+        let token = JSON.parse(localStorage.getItem("Token"))
+        if (token) {
+            if (window.confirm("Are You Sure to buy Prodict " + cartdata[id].data.data.title + " Price is : " + cartdata[id].data.data.price + "Quantity is : " + cartdata[id].quantity)) {
+                alert("Order Placed")
+                if (local.length >= 0) {
+                    local.push(cartdata[id]);
+                    localStorage.setItem('placedorders', JSON.stringify(local))
+                }
+                else {
+                    arr.push(cartdata[id])
+                    localStorage.setItem('placedorders', JSON.stringify(arr))
+                }
+                cartdata.splice(id, 1);
+                localStorage.setItem('cart', JSON.stringify(cartdata))
+                setdata(JSON.parse(localStorage.getItem('cart')))
+            }
+        }
+        else {
+            alert("You need to Login First");
+            window.location.href = "/LoginPage"
         }
     }
 
-    const handleCheckout=()=>{
+    const handleCheckout = () => {
         dispatch(checkOut())
-        let sum=0;
-        data.map((i)=>{
-            sum=sum+parseFloat(i.data.data.price)
+        let sum = 0;
+        data.map((i) => {
+            sum = sum + parseFloat(i.data.data.price)
         })
-        if(window.confirm("Are You Sure to Buy all products price is : "+sum))
-        {
-            alert("Order placed successfully")
-            setdata([])
-            return<Placed show={true}/>
+        let token = JSON.parse(localStorage.getItem("Token"))
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        if (cart.length != 0) {
+            if (token) {
+                if (window.confirm("Are You Sure to Buy all products price is : " + sum)) {
+                    alert("Order placed successfully")
+                    if (local.length >= 0) {
+                        local.push(cartdata);
+                        localStorage.setItem('All', JSON.stringify(local))
+                    }
+                    else {
+                        arr.push(cartdata)
+                        localStorage.setItem('All', JSON.stringify(arr))
+                    }
+                    setdata([])
+                    localStorage.removeItem('cart')
+                    window.location.href = "/"
+                }
+            }
+            else {
+                alert("You need to Login First");
+                window.location.href = "/LoginPage"
+            }
+        }
+        else {
+            alert("cart is empty")
+            window.location.href = "/"
+
         }
     }
-    console.log("Data fffff v ",data);
+
+
+    console.log("Data fffff v ", data);
     return (<div>
         <Hedder />
         <div className="display">
